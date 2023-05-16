@@ -1,0 +1,84 @@
+---
+import {formatearFecha} from '../../helpers/formatesFecha.js'
+export interface Props {
+    titulo: string;
+    fecha: string;
+    url: string;
+    imagen:string 
+    contenido: string
+}
+
+const {titulo, fecha, url, imagen, contenido } = Astro.props
+---
+
+<div class="post">
+    <div class="contenido">
+        <h3>{titulo}</h3>
+        <img src={imagen} alt={`Imagen del post ${titulo}`}>
+        <p class="fecha">{formatearFecha(fecha)}</p>
+        <p class="resumen">{contenido}</p>
+        <a class="enlace" href={`/blog/${url}`}>Ver post</a>
+    </div>
+</div>
+
+
+
+<style>
+.post {
+max-width: 80rem;
+margin: 0 auto;
+}
+
+.contenido {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.contenido img{
+    min-height: 50%;
+    object-fit: cover;
+}
+.contenido h3 {
+    font-weight: 900;
+    font-size: 2.4rem;
+}
+.fecha {
+    font-size: 1.6rem;
+    color: var(--primary);
+}
+.resumen {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    overflow: hidden;
+}
+.texto {
+    white-space: pre-wrap;
+}
+
+.mt-3 {
+    margin-top: 3rem;
+}
+.enlace {
+    margin-top: 2rem;
+    display: block;
+    border-radius: 10px;
+    background-color: var(--bg-300);
+    color: var(--text-200);
+    text-decoration: none;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: 700;
+    transition-property: background-color;
+    transition-duration: 300ms;
+}
+.enlace:hover {
+    background-color: var(--secondary);
+}
+</style>

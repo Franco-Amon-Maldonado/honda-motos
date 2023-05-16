@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import {formatearFecha} from '../../../helpers/formatesFecha.js'
+
+export async function getStaticPaths(){
+const url = `${import.meta.env.PUBLIC_API_URL}/posts?populate=imagen`
+const respuesta = await fetch(url)
+const { data } = await respuesta.json()
+
+return data.map(post => ({
+    params:{
+        id: post.attributes.url
+    },
+
+    props:{
+        post: post.attributes
+    }
+
+}))
+}
+const { titulo, imagen, contenido, publishedAt } = Astro.props.post
+---
+
+
+<Layout 
+    title={titulo}
+    description="Honda motos - Blog de motos - Los precios del mercado - Las mejores opciones para ti">
+
+
+    <article class="post"> 
+        <img class="mt-3" src={imagen.data.attributes.url} alt={`Imagen del post ${titulo}`}>
+
+        <div class="contenido">
+            <h3>{titulo}</h3>
+            <p class="texto">{contenido}</p>
+            <p class="fecha">{formatearFecha(publishedAt)}</p>
+            <a class="enlace" href="/blog">Volver</a>
+        </div>
+
+    </article>
+
+
+</Layout>
+
+
+<style>
+    
+.post {
+    max-width: 80rem;
+    margin: 0 auto;
+}
+.contenido {
+    padding: 1.5rem;
+}
+.contenido h3 {
+    font-weight: 900;
+    font-size: 2.8rem;
+    margin: 0;
+}
+.fecha {
+    font-size: 1.6rem;
+    color: var(--primary);
+}
+.texto {
+    white-space: pre-wrap;
+}
+.mt-3 {
+    margin-top: 3rem;
+}
+
+.enlace {
+    margin-top: 2rem;
+    display: block;
+    border-radius: 10px;
+    background-color: var(--bg-300);
+    color: var(--text-200);
+    text-decoration: none;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: 700;
+    transition-property: background-color;
+    transition-duration: 300ms;
+}
+.enlace:hover {
+    background-color: var(--secondary);
+}
+</style>

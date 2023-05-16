@@ -13,7 +13,7 @@ console.log(Astro.url.pathname);
 
         <nav class="navegacion">
             <a class={Astro.url.pathname === '/' ? 'active' : ''}  href="/">Inicio</a>
-            <a class={Astro.url.pathname === '/nosotros' ? 'active' : ''} href="nosotros">Nosotros</a>
+            <a class={Astro.url.pathname === '/nosotros' ? 'active' : ''} href="/nosotros">Nosotros</a>
             <a class={Astro.url.pathname === '/blog' ? 'active' : ''} href="/blog">Blog</a>
             <a class={Astro.url.pathname === '/motos' ? 'active' : ''} href="/motos">Motos</a>
         </nav>
