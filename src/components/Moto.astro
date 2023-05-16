@@ -12,7 +12,7 @@ const {nombre, descripcion, url, precio, imagen} = Astro.props;
 ---
 
 <div class="moto">
-    <img src={imagen.url} alt=`Imagen moto ${nombre}`>
+    <img src={imagen} alt=`Imagen moto ${nombre}`>
    
     <div class="contenido">
         <h3>{nombre}</h3>
@@ -29,7 +29,7 @@ const {nombre, descripcion, url, precio, imagen} = Astro.props;
     grid-template-columns: 1fr 2fr;
     gap: 1rem;
     align-items: center;
-    justify-cont
+    justify-content: space-between;
     max-width: 70rem;
     margin: 0 auto;
 }

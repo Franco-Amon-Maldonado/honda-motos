@@ -21,7 +21,7 @@ const { data } = await respuesta.json()
                    descripcion={moto.attributes.descripcion}                 
                    url={moto.attributes.url}                 
                    precio={moto.attributes.precio}                 
-                   imagen={moto.attributes.imagen.data.attributes}                 
+                   imagen={moto.attributes.imagen.data.attributes.url}                 
                                     
                 />
             ))}
