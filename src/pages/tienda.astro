@@ -1,13 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import Moto from '../components/Moto.astro'
+
+const url = `${import.meta.env.PUBLIC_API_URL}/motos?populate=imagen`
+const respuesta = await fetch(url)
+const { data } = await respuesta.json()
 ---
 
 <Layout 
     title="Tienda"
     description="Honda motos - Tienda de honda motos - Los precios del mercado - Las mejores opciones para ti">
     
-    <main>
-        <h1>Tienda</h1>
+    <main class="contenedor">
+        <h1 class="heading">Nuestra coleccion</h1>
+
+        <div class="grid">
+            {data?.map(moto => (
+                <Moto
+                   nombre={moto.attributes.nombre}
+                   descripcion={moto.attributes.descripcion}                 
+                   url={moto.attributes.url}                 
+                   precio={moto.attributes.precio}                 
+                   imagen={moto.attributes.imagen.data.attributes}                 
+                                    
+                />
+            ))}
+        </div>
     </main>
 
 </Layout>
