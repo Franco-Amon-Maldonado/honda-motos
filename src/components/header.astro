@@ -1,5 +1,7 @@
 ---
 import logo from "../img/logoHonda.png"
+
+console.log(Astro.url.pathname);
 ---
 
 <header class="header">
@@ -10,10 +12,10 @@ import logo from "../img/logoHonda.png"
     </a>
 
         <nav class="navegacion">
-            <a href="/">Inicio</a>
-            <a href="nosotros">Nosotros</a>
-            <a href="/blog">Blog</a>
-            <a href="/tienda">Tienda</a>
+            <a class={Astro.url.pathname === '/' ? 'active' : ''}  href="/">Inicio</a>
+            <a class={Astro.url.pathname === '/nosotros' ? 'active' : ''} href="nosotros">Nosotros</a>
+            <a class={Astro.url.pathname === '/blog' ? 'active' : ''} href="/blog">Blog</a>
+            <a class={Astro.url.pathname === '/tienda' ? 'active' : ''} href="/tienda">Tienda</a>
         </nav>
     </div>
 

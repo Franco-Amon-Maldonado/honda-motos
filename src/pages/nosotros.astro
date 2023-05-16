@@ -1,13 +1,55 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import Layout from "../layouts/Layout.astro";
+import imagen from "../img/nosotros.webp";
 ---
 
-<Layout 
-    title="nosotros"
-    description="Honda motos - Sobre nosotros">
-    
-    <main>
-        <h1>Nosotros</h1>
-    </main>
+<Layout title="nosotros" description="Honda motos - Sobre nosotros">
+    <main class="contenedor">
+        <h1 class="heading">Nosotros</h1>
+        <div class="contenido">
+            <img src={imagen} alt="Imagen sobre nosotros" />
 
+            <div>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
+                    efficitur condimentum lacus, varius elementum dui lobortis at.
+                    Mauris imperdiet urna vel nunc venenatis, bibendum lacinia arcu
+                    rhoncus. Pellentesque faucibus lacinia posuere. Nullam dictum
+                    velit id lorem viverra imperdiet. Nullam semper, velit fringilla
+                    bibendum dapibus, velit dolor tincidunt elit, nec tincidunt nisi
+                    neque ut libero. Donec sit amet sapien at eros lacinia
+                    venenatis. Aliquam volutpat eros quis mi rhoncus, a feugiat
+                    nulla malesuada. Sed hendrerit mi metus, et mollis mi aliquam
+                    eget. Praesent magna quam, mollis vitae condimentum quis, congue
+                    quis neque.
+                </p>
+                <p>
+                    Fusce eget neque lobortis, viverra neque at, ullamcorper massa.
+                    Etiam vulputate bibendum nisi, a ullamcorper orci. Ut fermentum
+                    nisl nunc, quis commodo justo auctor quis. Ut dictum iaculis
+                    lorem a convallis. Nunc urna diam, placerat ut sagittis a,
+                    pulvinar pretium mi. Vestibulum eleifend libero eget imperdiet
+                    tincidunt. Donec non volutpat lorem. Nunc ut efficitur felis,
+                    molestie lobortis ligula. Ut bibendum massa vitae diam suscipit,
+                    sit amet dignissim sapien consectetur. Mauris ut semper magna.
+                    Donec volutpat at lectus et ultricies.
+                </p>
+            </div>
+        </div>
+
+       
+    </main>
 </Layout>
+
+<style>
+    .contenido {
+        display: grid;
+        gap: 4rem;
+    }
+    @media (min-width: 768px) {
+        .contenido {
+            grid-template-columns: repeat(2, 1fr);
+            align-items: center;
+        }
+    }
+</style>
