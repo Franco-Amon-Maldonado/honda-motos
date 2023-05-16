@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro'
+
+export async function getStaticPaths(){
+    const url = `${import.meta.env.PUBLIC_API_URL}/motos?populate=imagen`
+    const respuesta = await fetch(url)
+    const { data } = await respuesta.json();
+    return data.map(moto => ({
+        params: {
+            id: moto.attributes.url
+        },
+        props:{
+            moto: moto.attributes
+        }
+    }))
+}
+
+console.log(Astro.props)
+---
+
+
+<Layout 
+    title="Tienda"
+    description="Honda motos - Tienda de honda motos - Los precios del mercado - Las mejores opciones para ti">
+
+
+    <main class="moto"> 
+
+    </main>
+
+
+
+
+</Layout>

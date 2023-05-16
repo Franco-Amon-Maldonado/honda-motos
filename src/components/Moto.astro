@@ -1,4 +1,5 @@
 ---
+import {formatearPrecio} from '../../helpers/formatsPrecio.js'
 export interface Props {
     nombre:string
     descripcion:string
@@ -16,7 +17,7 @@ const {nombre, descripcion, url, precio, imagen} = Astro.props;
     <div class="contenido">
         <h3>{nombre}</h3>
         <p class="descripcion">{descripcion}</p>
-        <p class="precio">${precio}</p>
+        <p class="precio">${formatearPrecio(precio)}</p>
         <a href={`/motos/${url}`} class="enlace">Ver moto</a>
     </div>
 </div>
@@ -25,17 +26,35 @@ const {nombre, descripcion, url, precio, imagen} = Astro.props;
     
 .moto {
     display: grid;
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: 1fr 2fr;
     gap: 1rem;
     align-items: center;
+    justify-cont
     max-width: 70rem;
     margin: 0 auto;
 }
+
+@media (min-width: 768px){
+    .moto{
+        grid-template-columns: 1fr 2fr
+        grid-row-gap: 10rem;
+    }
+}
+
+@media (min-width: 992px){
+    .moto{
+        grid-template-columns: 2fr 1fr
+    }
+}
 .contenido {
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    height: 100%;
 }
 .contenido h3 {
-    font-size: 3rem;
+    font-size: 2rem;
     text-transform: uppercase;
     color: var(--primary);
 }
@@ -48,26 +67,27 @@ const {nombre, descripcion, url, precio, imagen} = Astro.props;
 }
 .precio {
     color: var(--primary);
-    font-size: 4rem;
+    font-size: 2.5rem;
     margin: 0;
     font-weight: 900;
 }
 .enlace {
     margin-top: 2rem;
     display: block;
-    background-color: var(--black);
-    color: var(--white);
+    background-color: var(--bg-300);
+    color: var(--text-200);
     text-decoration: none;
     padding: 1rem;
     text-align: center;
     text-transform: uppercase;
+    border-radius: 10px;
     font-size: 1.4rem;
     font-weight: 700;
     transition-property: background-color;
     transition-duration: 300ms;
 }
 .enlace:hover {
-    background-color: var(--primary);
+    background-color: var(--secondary);
 }
 
 .formulario {
