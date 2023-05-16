@@ -1,13 +1,74 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Moto from '../components/Moto.astro'
+import Post from '../components/Post.astro'
+import Curso from '../components/Curso.astro';
+
+const urlMotos = `${import.meta.env.PUBLIC_API_URL}/motos?populate=imagen`
+const urlPosts = `${import.meta.env.PUBLIC_API_URL}/posts?populate=imagen`
+const urlCurso = `${import.meta.env.PUBLIC_API_URL}/curso?populate=imagen`
+
+const [ resMotos, resPosts, resCurso ] = await Promise.all([
+	fetch(urlMotos),
+	fetch(urlPosts),
+	fetch(urlCurso),
+
+
+])
+
+const [ {data: motos}, {data: posts}, {data:curso}] = await Promise.all([
+	resMotos.json(),
+	resPosts.json(),
+	resCurso.json()
+
+])
+
+
 ---
 
 <Layout 
 		title="Inicio"
 		description="Honda Motos - Venta de motos, cursos, blog y mas">
+
 	<main class="contenedor">
-		<h1 class="heading">Inicio</h1>
+		<h1 class="heading">Nuestro Stock de motos</h1>
+		<div class="grid">
+			{motos?.map(moto => (
+                <Moto
+                   nombre={moto.attributes.nombre}
+                   descripcion={moto.attributes.descripcion}                 
+                   url={moto.attributes.url}                 
+                   precio={moto.attributes.precio}                 
+                   imagen={moto.attributes.imagen.data.attributes}                                
+                />
+            ))}
+		</div>
 	</main>
+	
+		<Curso	
+			titulo={curso.attributes.titulo}
+			contenido={curso.attributes.contenido}
+			imagen={curso.attributes.imagen.data.attributes.url}
+		/>
+
+		<section class="contenedor">
+			<h2 class="heading">Blog</h2>
+			<div class="grid">
+				{posts?.map(post =>(
+        	        <Post
+        	            titulo={post.attributes.titulo}
+        	            contenido={post.attributes.contenido}
+        	            url={post.attributes.url}
+        	            fecha={post.attributes.publishedAt}
+        	            imagen={post.attributes.imagen.data.attributes.url}
+
+        	        />
+        	    ))}
+			</div>
+		</section>
+		
+
+	
 </Layout>
 
 <style>
