@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import {formatearPrecio} from '../../../helpers/formatsPrecio.js'
 
 export async function getStaticPaths(){
     const url = `${import.meta.env.PUBLIC_API_URL}/motos?populate=imagen`
@@ -14,17 +15,24 @@ export async function getStaticPaths(){
         }
     }))
 }
-
-console.log(Astro.props)
+const { nombre, imagen, descripcion, precio} = Astro.props.moto
 ---
 
 
 <Layout 
-    title="Tienda"
+    title={nombre}
     description="Honda motos - Tienda de honda motos - Los precios del mercado - Las mejores opciones para ti">
 
 
     <main class="moto"> 
+        <img src={imagen.data.attributes.url} alt={`Imagen de la guitarra ${nombre}`}>
+
+        <div class="contenido">
+            <h3>{nombre}</h3>
+            <p class="descripcion">{descripcion}</p>
+            <p class="precio">${formatearPrecio(precio)}</p>
+            <a class="enlace" href="/motos">Volver</a>
+        </div>
 
     </main>
 
@@ -32,3 +40,67 @@ console.log(Astro.props)
 
 
 </Layout>
+
+<style>
+    .moto {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 1rem;
+    align-items: center;
+    max-width: 70rem;
+    margin: 0 auto;
+}
+
+@media (min-width: 992px){
+    .moto{
+        grid-template-columns: 2fr 1fr
+    }
+}
+
+.contenido {
+    padding: 1rem;
+}
+
+.contenido a{
+    display: block;
+    text-align: center;
+}
+
+.contenido h3 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+.descripcion {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 10;
+    overflow: hidden;
+    font-size: 1.8rem;
+}
+.precio {
+    color: var(--primary);
+    font-size: 4rem;
+    margin: 0;
+    font-weight: 900;
+}
+
+.enlace {
+    margin-top: 2rem;
+    display: block;
+    background-color: var(--bg-300);
+    color: var(--text-200);
+    text-decoration: none;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    transition-property: background-color;
+    transition-duration: 300ms;
+}
+.enlace:hover {
+    background-color: var(--secondary);
+}
+</style>
